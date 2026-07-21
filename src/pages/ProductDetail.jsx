@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getProduct, addToCart, addToWishlist } from '../api';
+import { getProduct, addToCart, addToWishlist, getImageUrl } from '../api';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import { ShoppingCart, Heart, ArrowLeft, Package, Minus, Plus, Check, Loader2, MessageCircle } from 'lucide-react';
@@ -87,7 +87,7 @@ export default function ProductDetail() {
         {/* Image */}
         <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl overflow-hidden">
           {product.image_url ? (
-            <img src={product.image_url} alt={product.name} className="w-full aspect-square object-cover" />
+            <img src={getImageUrl(product.image_url)} alt={product.name} className="w-full aspect-square object-cover" />
           ) : (
             <div className="w-full aspect-square flex items-center justify-center">
               <span className="text-8xl font-extrabold text-gray-200">{product.name[0]}</span>
@@ -184,7 +184,7 @@ export default function ProductDetail() {
                   `Price: Rs. ${price.toLocaleString()}${hasDiscount ? ` (was Rs. ${product.price.toLocaleString()})` : ''}\n` +
                   `${product.category ? `Category: ${product.category}\n` : ''}` +
                   `${product.description ? `\nDescription: ${product.description}\n` : ''}` +
-                  `\nImage: ${window.location.origin}${product.image_url || ''}\n` +
+                  `\nImage: ${getImageUrl(product.image_url)}\n` +
                   `\nProduct Link: ${window.location.href}\n\nPlease share details.`
                 )}`}
                 target="_blank"

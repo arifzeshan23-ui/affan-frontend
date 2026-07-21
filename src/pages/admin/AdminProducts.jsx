@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { getProducts, createProduct, updateProduct, deleteProduct, uploadImage } from '../../api';
+import { getProducts, createProduct, updateProduct, deleteProduct, uploadImage, getImageUrl } from '../../api';
 import toast from 'react-hot-toast';
 import { Plus, Pencil, Trash2, X, Loader2, Search, Upload, Star, StarOff, Image, Sparkles } from 'lucide-react';
 
@@ -165,7 +165,7 @@ export default function AdminProducts() {
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm shrink-0 overflow-hidden">
-                        {p.image_url ? <img src={p.image_url} className="w-full h-full object-cover" alt="" /> : p.name[0]}
+                        {p.image_url ? <img src={getImageUrl(p.image_url)} className="w-full h-full object-cover" alt="" /> : p.name[0]}
                       </div>
                       <div className="min-w-0">
                         <p className="font-medium text-gray-900 truncate max-w-[200px]">{p.name}</p>

@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const API_BASE = 'https://affan-backend.fastapicloud.dev';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${API_BASE}/api`,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -24,6 +26,12 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+export const getImageUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http')) return url;
+  return `${API_BASE}${url}`;
+};
 
 // Auth
 export const register = (data) => api.post('/auth/register', data);
